@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Free Lesson — LA English</title>
+<meta name="description" content="Sign up for a free trial English lesson with LA English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- NOTE: this page is intentionally not linked from the main nav bar -->
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html" aria-label="LA English home">
+      <svg data-logo-wordmark="nav" width="170" height="46" viewBox="0 0 320 100">
+        <text id="wordmark-nav" x="40" y="50" text-anchor="start" font-family="Archivo" font-weight="800" font-size="32" fill="#14201A">LA English</text>
+        <line id="seg-green-nav" y1="68" y2="68" stroke="#167544" stroke-width="4"></line>
+        <line id="seg-accent-nav" y1="68" y2="68" stroke="#E14F2A" stroke-width="4"></line>
+      </svg>
+    </a>
+    <div class="nav-actions" style="margin-inline-start:auto;">
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ar">AR</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="tight" style="padding-top:56px;">
+    <div class="container">
+      <div class="section-head" style="text-align:center; margin-left:auto; margin-right:auto;">
+        <span class="eyebrow" data-en="Free Lesson" data-ar="حصة مجانية">Free Lesson</span>
+        <h1 style="font-size:clamp(1.9rem,3.4vw,2.5rem); margin-top:14px;" data-en="Book your free trial lesson" data-ar="احجز حصتك التجريبية المجانية">Book your free trial lesson</h1>
+        <p data-en="Tell us a little about yourself and we'll reach out on WhatsApp to schedule your first class." data-ar="أخبرنا قليلاً عن نفسك وسنتواصل معك عبر واتساب لتحديد موعد حصتك الأولى.">Tell us a little about yourself and we'll reach out on WhatsApp to schedule your first class.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="card form-card">
+        <form id="signup-form" novalidate>
+
+          <div class="field">
+            <label for="firstName" data-en="First Name" data-ar="الاسم الأول">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+
+          <div class="field">
+            <label for="lastName" data-en="Last Name" data-ar="اسم العائلة">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+
+          <div class="field">
+            <label for="whatsapp" data-en="WhatsApp Number" data-ar="رقم الواتساب">WhatsApp Number</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+9665XXXXXXXX" required>
+            <div class="field-hint" data-en="Include your country code (e.g., +9665XXXXXXXX)." data-ar="أدرج رمز الدولة (مثال: ‎+9665XXXXXXXX).">Include your country code (e.g., +9665XXXXXXXX).</div>
+          </div>
+
+          <div class="field">
+            <label for="reason" data-en="Why are you interested in learning English?" data-ar="لماذا أنت مهتم بتعلم اللغة الإنجليزية؟">Why are you interested in learning English?</label>
+            <select id="reason" name="reason" required></select>
+          </div>
+
+          <div class="field">
+            <label for="country" data-en="Country" data-ar="الدولة">Country</label>
+            <select id="country" name="country" required></select>
+          </div>
+
+          <div class="field" id="province-field" style="display:none;">
+            <label for="province" data-en="Region" data-ar="المنطقة">Region</label>
+            <select id="province" name="province"></select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            <span data-en="Submit" data-ar="إرسال">Submit</span>
+          </button>
+
+          <div id="form-msg" class="form-msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none; margin-top:0;">
+    <span data-en="© 2026 LA English. All rights reserved." data-ar="© 2026 إل إيه إنجلش. جميع الحقوق محفوظة.">© 2026 LA English. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="assets/data/form-data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/signup.js"></script>
+</body>
+</html>
