@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#D8DAD1"/>
+  <g transform="translate(200,120)" fill="none" stroke="#8B9385" stroke-width="6">
+    <rect x="-46" y="-30" width="92" height="60" rx="8"/>
+    <circle cx="0" cy="0" r="16"/>
+  </g>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#5B655E">Replace with a photo of a class in session</text>
+</svg>
