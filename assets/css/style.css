@@ -40,7 +40,7 @@ body{
 
 html[dir="rtl"] body{ font-family: var(--font-ar); }
 html[dir="rtl"] .nav a, html[dir="rtl"] .btn, html[dir="rtl"] p, html[dir="rtl"] li,
-html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .eyebrow,
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
 html[dir="rtl"] .level-name, html[dir="rtl"] .card-title{
   font-family: var(--font-ar);
 }
@@ -55,14 +55,6 @@ a{ color: inherit; }
 .container{ max-width: var(--container); margin:0 auto; padding: 0 24px; }
 section{ padding: 76px 0; }
 section.tight{ padding: 48px 0; }
-
-.eyebrow{
-  display:inline-flex; align-items:center; gap:8px;
-  font-family: var(--font-display); font-weight:700; font-size:0.72rem; letter-spacing:0.1em;
-  text-transform: uppercase; color: var(--green-deep);
-  background: #E9EEE8; border:1px solid var(--line);
-  padding: 5px 12px; border-radius: 999px;
-}
 
 /* ---------- Header / nav ---------- */
 .site-header{
