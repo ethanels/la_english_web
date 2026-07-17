@@ -123,17 +123,30 @@ section.tight{ padding: 48px 0; }
 .hero-grid{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap:48px; align-items:center; }
 .hero .lede{ font-size:1.08rem; max-width:52ch; }
 .hero-ctas{ display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
-.hero-badges{ display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
-.hero-badge{
-  display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
-  border-radius:999px; padding:8px 14px; font-size:0.82rem; font-weight:600; color: var(--text-soft);
-}
-.hero-badge .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); flex-shrink:0; }
 .hero-visual{
   border-radius: var(--radius-m); overflow:hidden; aspect-ratio: 4/3; background: var(--line);
 }
 .hero-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
 @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+
+.feature-strip{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  background:#fff; border:1px solid var(--line); border-radius: var(--radius-m);
+  margin-top:48px; overflow:hidden;
+}
+.feature-strip-item{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:22px 16px; border-inline-end:1px solid var(--line);
+  font-family: var(--font-display); font-weight:700; font-size:0.9rem; color: var(--ink);
+  text-align:center;
+}
+.feature-strip-item:last-child{ border-inline-end:none; }
+.feature-strip-item svg{ width:22px; height:22px; color: var(--green); flex-shrink:0; }
+@media (max-width:760px){
+  .feature-strip{ grid-template-columns:1fr; }
+  .feature-strip-item{ border-inline-end:none; border-bottom:1px solid var(--line); justify-content:flex-start; }
+  .feature-strip-item:last-child{ border-bottom:none; }
+}
 
 /* ---------- Cards / grids ---------- */
 .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
