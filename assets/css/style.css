@@ -68,6 +68,7 @@ section.tight{ padding: 48px 0; }
 }
 .brand{ display:flex; align-items:center; text-decoration:none; }
 .brand svg{ display:block; }
+[data-logo-wordmark] text{ direction: ltr; }
 
 .nav{ display:flex; align-items:center; gap:26px; }
 .nav a{
