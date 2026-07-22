@@ -1,4 +1,4 @@
-// LA English — renders the 12 levels and draws a swerving dotted progress line through them
+// LA English — renders the 12 levels as alternating white/green cards
 
 (function () {
   function easternArabicNumeral(n) {
@@ -16,10 +16,6 @@
       row.className = "level-row" + (idx % 2 === 1 ? " align-right" : "");
       row.dataset.levelIndex = idx;
 
-      const node = document.createElement("div");
-      node.className = "level-node";
-      node.textContent = lang === "ar" ? easternArabicNumeral(item.level) : String(item.level);
-
       const card = document.createElement("div");
       card.className = "level-card";
 
@@ -36,52 +32,30 @@
 
       card.appendChild(name);
       card.appendChild(ul);
-      row.appendChild(node);
       row.appendChild(card);
       track.appendChild(row);
     });
 
-    requestAnimationFrame(drawTrackLine);
+    equalizeCardHeights();
   }
 
-  function drawTrackLine() {
+  function equalizeCardHeights() {
     const track = document.getElementById("levels-track");
-    const svg = document.getElementById("track-line-svg");
-    if (!track || !svg) return;
+    if (!track) return;
+    const cards = track.querySelectorAll(".level-card");
+    if (!cards.length) return;
 
-    const trackRect = track.getBoundingClientRect();
-    const nodes = track.querySelectorAll(".level-node");
-    if (!nodes.length) return;
-
-    svg.setAttribute("width", trackRect.width);
-    svg.setAttribute("height", trackRect.height);
-    svg.setAttribute("viewBox", `0 0 ${trackRect.width} ${trackRect.height}`);
-
-    const points = Array.from(nodes).map((n) => {
-      const r = n.getBoundingClientRect();
-      return {
-        x: r.left + r.width / 2 - trackRect.left,
-        y: r.top + r.height / 2 - trackRect.top
-      };
-    });
-
-    if (points.length < 2) { svg.innerHTML = ""; return; }
-
-    let d = `M ${points[0].x} ${points[0].y} `;
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = points[i], p1 = points[i + 1];
-      const midY = (p0.y + p1.y) / 2;
-      d += `C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y} `;
-    }
-
-    svg.innerHTML = `<path d="${d}" fill="none" stroke="#167544" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>`;
+    cards.forEach((c) => { c.style.height = "auto"; });
+    const max = Math.max(...Array.from(cards).map((c) => c.getBoundingClientRect().height));
+    cards.forEach((c) => { c.style.height = max + "px"; });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     let saved = "en";
     try { saved = localStorage.getItem("laEnglishLang") || "en"; } catch (e) { /* ignore */ }
     renderLevels(saved);
-    window.addEventListener("resize", drawTrackLine);
+    window.addEventListener("resize", equalizeCardHeights);
+    window.addEventListener("load", equalizeCardHeights);
   });
 
   document.addEventListener("laEnglishLangChange", (e) => {
