@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<!-- NOTE: this page is intentionally not linked from the main nav bar -->
+<!-- Note: This page is intentionally not included in the navigation bar-->
 <header class="site-header">
   <div class="nav-wrap">
     <a class="brand" href="index.html" aria-label="LA English home">
@@ -21,12 +21,19 @@
         <line id="seg-accent-nav" y1="68" y2="68" stroke="#E14F2A" stroke-width="4"></line>
       </svg>
     </a>
-    <div class="nav-actions" style="margin-inline-start:auto;">
-      <div class="lang-toggle">
-        <button data-lang="en" class="active">EN</button>
-        <button data-lang="ar">AR</button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav">
+      <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="levels.html" data-en="Levels" data-ar="المستويات">Levels</a>
+      <a href="teachers.html" data-en="Our Teachers" data-ar="معلمونا">Our Teachers</a>
+      <a href="pricing.html" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+      <div class="nav-actions">
+        <div class="lang-toggle">
+          <button data-lang="en" class="active">EN</button>
+          <button data-lang="ar">AR</button>
+        </div>
       </div>
-    </div>
+    </nav>
   </div>
 </header>
 
