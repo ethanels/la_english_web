@@ -64,8 +64,12 @@
 
           <div class="field">
             <label for="whatsapp" data-en="WhatsApp Number" data-ar="رقم الواتساب">WhatsApp Number</label>
-            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+9665XXXXXXXX" required>
-            <div class="field-hint" data-en="Include your country code (e.g., +9665XXXXXXXX)." data-ar="أدرج رمز الدولة (مثال: ‎+9665XXXXXXXX).">Include your country code (e.g., +9665XXXXXXXX).</div>
+            <div class="phone-field">
+              <select id="whatsappCode" name="whatsappCode" required aria-label="Country code"></select>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="5XXXXXXXX" inputmode="numeric" required>
+            </div>
+            <div class="field-hint" data-en="Select your country code, then enter your number." data-ar="اختر رمز الدولة، ثم أدخل رقمك.">Select your country code, then enter your number without it.</div>
+            <div class="field-error" id="whatsapp-error" data-en="Please enter a valid phone number (numbers only, no leading 0)." data-ar="يرجى إدخال رقم هاتف صحيح (أرقام فقط).">Please enter a valid phone number (numbers only).</div>
           </div>
 
           <div class="field">
