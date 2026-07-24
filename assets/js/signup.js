@@ -29,10 +29,45 @@
     if (prevValue) select.value = prevValue;
   }
 
+  function populatePhoneCodeSelect(select, items, placeholderEn, placeholderAr, lang) {
+    const prevValue = select.value;
+    select.innerHTML = "";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = lang === "ar" ? placeholderAr : placeholderEn;
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    items.forEach((item) => {
+      const opt = document.createElement("option");
+      opt.value = item.dial;
+      opt.dataset.full = item.dial + " " + (lang === "ar" ? item.ar : item.en);
+      opt.textContent = opt.dataset.full;
+      select.appendChild(opt);
+    });
+
+    if (prevValue) select.value = prevValue;
+    compactPhoneSelection(select);
+  }
+
+  // Dropdown list always shows "+dial Country"; the closed box shows just "+dial" once a code is picked.
+  function expandPhoneOptions(select) {
+    Array.from(select.options).forEach((opt) => {
+      if (opt.dataset.full) opt.textContent = opt.dataset.full;
+    });
+  }
+
+  function compactPhoneSelection(select) {
+    const opt = select.options[select.selectedIndex];
+    if (opt && opt.value) opt.textContent = opt.value;
+  }
+
   function renderFormOptions(lang) {
     const reasonSelect = document.getElementById("reason");
     const countrySelect = document.getElementById("country");
     const provinceSelect = document.getElementById("province");
+    const whatsappCodeSelect = document.getElementById("whatsappCode");
 
     if (reasonSelect) {
       populateSelect(reasonSelect, window.LA_ENGLISH_REASONS,
@@ -46,6 +81,10 @@
       populateSelect(provinceSelect, window.LA_ENGLISH_SAUDI_PROVINCES,
         "Select a province", "اختر منطقة", lang);
     }
+    if (whatsappCodeSelect) {
+      populatePhoneCodeSelect(whatsappCodeSelect, window.LA_ENGLISH_COUNTRY_CODES,
+        "Country code", "رمز الدولة", lang);
+    }
     toggleProvinceField();
   }
 
@@ -56,9 +95,9 @@
     provinceField.style.display = countrySelect.value === "Saudi Arabia" ? "block" : "none";
   }
 
-  function validateWhatsApp(value) {
-    // Requires a leading + and at least 8 digits total (basic sanity check, not full E.164 validation)
-    return /^\+[1-9]\d{7,14}$/.test(value.trim());
+  function validateWhatsApp(countryCode, localNumber) {
+    // Country code must be one of the selected dial codes; local number is 6-12 digits (basic sanity check).
+    return /^\+[1-9]\d{0,3}$/.test(countryCode.trim()) && /^\d{6,12}$/.test(localNumber.trim());
   }
 
   function showMessage(type, textEn, textAr) {
@@ -74,19 +113,21 @@
 
     const firstName = form.firstName.value.trim();
     const lastName = form.lastName.value.trim();
-    const whatsapp = form.whatsapp.value.trim();
+    const whatsappCode = form.whatsappCode.value.trim();
+    const whatsappLocal = form.whatsapp.value.trim();
     const reason = form.reason.value;
     const country = form.country.value;
     const province = form.province ? form.province.value : "";
 
-    if (!firstName || !lastName || !reason || !country) {
+    if (!firstName || !lastName || !reason || !country || !whatsappCode) {
       showMessage("error", "Please fill in all required fields.", "يرجى تعبئة جميع الحقول المطلوبة.");
       return;
     }
-    if (!validateWhatsApp(whatsapp)) {
-      showMessage("error", "Please enter a valid WhatsApp number with a country code (e.g., +9665XXXXXXXX).", "يرجى إدخال رقم واتساب صحيح مع رمز الدولة (مثال: ‎+9665XXXXXXXX).");
+    if (!validateWhatsApp(whatsappCode, whatsappLocal)) {
+      showMessage("error", "Please select your country code and enter a valid WhatsApp number (6-12 digits, no leading 0 or +).", "يرجى اختيار رمز الدولة وإدخال رقم واتساب صحيح (6-12 رقمًا، بدون صفر أو + في البداية).");
       return;
     }
+    const whatsapp = whatsappCode + whatsappLocal;
 
     const payload = {
       firstName, lastName, whatsapp, reason, country,
@@ -136,6 +177,24 @@
 
     const countrySelect = document.getElementById("country");
     if (countrySelect) countrySelect.addEventListener("change", toggleProvinceField);
+
+    const whatsappCodeSelect = document.getElementById("whatsappCode");
+    if (whatsappCodeSelect) {
+      whatsappCodeSelect.addEventListener("mousedown", () => expandPhoneOptions(whatsappCodeSelect));
+      whatsappCodeSelect.addEventListener("focus", () => expandPhoneOptions(whatsappCodeSelect));
+      whatsappCodeSelect.addEventListener("change", () => compactPhoneSelection(whatsappCodeSelect));
+      whatsappCodeSelect.addEventListener("blur", () => compactPhoneSelection(whatsappCodeSelect));
+    }
+
+    const whatsappInput = document.getElementById("whatsapp");
+    const whatsappError = document.getElementById("whatsapp-error");
+    if (whatsappInput && whatsappError) {
+      whatsappInput.addEventListener("input", () => {
+        const hasInvalidChars = /\D/.test(whatsappInput.value);
+        if (hasInvalidChars) whatsappInput.value = whatsappInput.value.replace(/\D/g, "");
+        whatsappError.classList.toggle("show", hasInvalidChars);
+      });
+    }
 
     const form = document.getElementById("signup-form");
     if (form) form.addEventListener("submit", handleSubmit);

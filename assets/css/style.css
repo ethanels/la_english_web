@@ -227,7 +227,12 @@ html[dir="rtl"] .teacher-card p{ text-align:right; }
 }
 html[dir="rtl"] .field select, html[dir="rtl"] .field input{ font-family: var(--font-ar); }
 .field input:focus, .field select:focus{ outline:2px solid var(--green); outline-offset:1px; }
+.phone-field{ display:flex; flex-wrap:wrap; gap:10px; }
+.phone-field select{ width:92px; flex-shrink:0; }
+.phone-field input{ width:auto; flex:1; min-width:140px; }
 .field-hint{ font-size:0.78rem; color: var(--text-faint); margin-top:4px; }
+.field-error{ font-size:0.78rem; color: var(--accent-deep); margin-top:4px; display:none; }
+.field-error.show{ display:block; }
 .form-msg{ margin-top:16px; font-size:0.9rem; font-weight:600; display:none; }
 .form-msg.show{ display:block; }
 .form-msg.success{ color: var(--green-deep); }
