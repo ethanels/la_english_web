@@ -10,7 +10,8 @@
   --accent: #E14F2A;
   --accent-deep: #C33F1D;
 
-  --bg: #EFF0EC;
+  /*--bg: #EFF0EC;*/
+  --bg: #F2E9DC
   --surface: #FFFFFF;
   --line: #D8DAD1;
   --text-soft: #4A524C;
